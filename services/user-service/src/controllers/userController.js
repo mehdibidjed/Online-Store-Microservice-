@@ -22,3 +22,13 @@ export const updateUserProfile = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getUserProfileById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userProfile = await UserModel.getById(id);
+    res.status(200).json(userProfile);
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+  }
+};

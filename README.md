@@ -15,3 +15,12 @@ docker run -d \
  -e KEYCLOAK_ADMIN_PASSWORD=admin \
  quay.io/keycloak/keycloak:21.1.1 \
  start-dev
+
+# run Consul , the registery service 
+docker run -d \
+  --name consul \
+  -p 8500:8500 \
+  -p 8600:8600/udp \
+  consul:1.15 agent -dev -client=0.0.0.0
+
+docker run -d --name consul --network="host" consul:1.15 agent -dev -client=0.0.0.0

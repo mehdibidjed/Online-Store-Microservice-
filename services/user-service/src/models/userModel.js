@@ -57,4 +57,10 @@ export const UserModel = {
       [address, phone, keycloakId]
     );
   },
+  async getById(id) {
+    return db.get(
+      `SELECT * FROM users WHERE id = ?`,
+      [id]
+    );
+  }
 };

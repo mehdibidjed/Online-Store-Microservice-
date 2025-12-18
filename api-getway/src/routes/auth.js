@@ -1,6 +1,6 @@
 import axios from "axios";
-import express, { response } from "express";
-import getServiceAddress from "../registery.js";
+import express from "express";
+import getServiceAddress from "../consum/registery.js";
 
 const router = express.Router();
 
@@ -102,20 +102,22 @@ async function signup(req, res) {
     phone,
   };
 
-  console.log(`${await getServiceAddress("user-service")}/users/create-profile`);
   await axios.post(
     `${await getServiceAddress("user-service")}/users/create-profile`,
     userProfile
   );
-  res.status(201).json({ message: "User Profile created succesfully", userProfile });
+  res
+    .status(201)
+    .json({ message: "User Profile created succesfully", userProfile });
 }
 
 async function signin(req, res) {
   const { username, password } = req.body;
+  console.log(req.body);
   try {
     const params = new URLSearchParams();
     params.append("grant_type", "password");
-    params.append("client_id", process.env.KEYCLOAK_CLIENT_ID || "api-gateway");
+    params.append("client_id", process.env.KEYCLOAK_CLIENT_ID || "api-getway");
     params.append("username", username);
     params.append("password", password);
 

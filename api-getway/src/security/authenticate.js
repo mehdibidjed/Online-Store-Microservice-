@@ -2,13 +2,25 @@ import jwt from "jsonwebtoken";
 import jwksRsa from "jwks-rsa";
 
 const client = jwksRsa({
-  jwksUri: process.env.KEYCLOAK_JWKS_URI,
+  jwksUri:
+    process.env.KEYCLOAK_JWKS_URI ||
+    "http://localhost:8080/realms/online-store/protocol/openid-connect/certs",
 });
 
 // get the public key from the JWKS endpoint
 function getKey(header, callback) {
   client.getSigningKey(header.kid, function (err, key) {
-    callback(null, key.getPublicKey());
+    if (err) {
+      console.error("JWKS error:", err);
+      return callback(err);
+    }
+
+    if (!key) {
+      return callback(new Error("Signing key not found"));
+    }
+
+    const publicKey = key.getPublicKey();
+    callback(null, publicKey);
   });
 }
 
@@ -24,4 +36,3 @@ function authenticate(req, res, next) {
 }
 
 export default authenticate;
-  
