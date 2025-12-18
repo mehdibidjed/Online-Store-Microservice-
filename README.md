@@ -24,3 +24,11 @@ docker run -d \
   consul:1.15 agent -dev -client=0.0.0.0
 
 docker run -d --name consul --network="host" consul:1.15 agent -dev -client=0.0.0.0
+# run postgres
+docker run -d \
+  --name postgres \
+  -p 5432:5432 \
+  -e POSTGRES_USER=product_user \
+  -e POSTGRES_PASSWORD=product_pass \
+  -e POSTGRES_DB=product_db \
+  postgres:16
