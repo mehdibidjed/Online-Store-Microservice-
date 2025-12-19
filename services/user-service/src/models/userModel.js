@@ -45,14 +45,14 @@ export const UserModel = {
     );
   },
 
-  async updateProfile(keycloakId, data) {
+  async updateProfile(id, data) {
     const { address, phone } = data;
 
     return db.run(
       `
       UPDATE users
       SET address = ?, phone = ?
-      WHERE keycloak_id = ?
+      WHERE id = ?
       `,
       [address, phone, keycloakId]
     );

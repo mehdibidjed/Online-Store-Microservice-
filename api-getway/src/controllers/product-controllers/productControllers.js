@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllProductsController = async (req, res) => {
   try {
-    const response = await axios.get("http://product-service:3002/products");
+    const response = await axios.get("http://localhost:3002/products");
     res.status(200).json(response.data);
   } catch (error) {
     res
@@ -13,9 +13,7 @@ export const getAllProductsController = async (req, res) => {
 export const getProductByIdController = async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await axios.get(
-      `http://product-service:3002/products/${id}`
-    );
+    const response = await axios.get(`http://localhost:3002/products/${id}`);
     res.status(200).json(response.data);
   } catch (error) {
     res
@@ -42,7 +40,7 @@ export const updateProductController = async (req, res) => {
   const productData = req.body;
   try {
     const response = await axios.put(
-      `http://product-service:3002/products/${id}`,
+      `http://product-service:3002/products/update-product${id}`,
       productData
     );
     res.status(200).json(response.data);
@@ -56,7 +54,7 @@ export const deleteProductController = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await axios.delete(
-      `http://product-service:3002/products/${id}`
+      `http://product-service:3002/products/delete-product/${id}`
     );
     res.status(200).json(response.data);
   } catch (error) {

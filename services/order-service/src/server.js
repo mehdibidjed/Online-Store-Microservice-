@@ -3,13 +3,13 @@ import { registerService, deregisterService } from "./consul/consul.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 async function start() {
   await registerService();
 
   app.listen(PORT, () => {
-    console.log(`Product Service running on port ${PORT}`);
+    console.log(`Orders Service running on port ${PORT}`);
   });
 }
 

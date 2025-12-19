@@ -11,8 +11,9 @@ export const createUserProfile = async (req, res) => {
 };
 export const updateUserProfile = async (req, res) => {
   try {
-    const keycloakId = req.params.keycloakId;
-    await UserModel.updateProfile(keycloakId, {
+    const id = req.params.id;
+    const { adress, phone_number } = req.body;
+    await UserModel.updateProfile(id, {
       address: adress,
       phone: phone_number,
     });
