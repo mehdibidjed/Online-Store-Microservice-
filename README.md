@@ -39,3 +39,18 @@ docker run -d \
 # communicate withe the database
 
 docker exec -it postgres psql -U product_user -d product_db
+
+# RabbutMQ instalation 
+docker network create backend
+docker run -d \
+  --name rabbitmq \
+  --network backend \
+  -p 15672:15672 \
+  rabbitmq:3-management
+you can access to this from :
+http://localhost:15672
+username: guest
+password: guest
+
+
+

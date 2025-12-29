@@ -1,6 +1,7 @@
 import app from "./app.js";
 import { registerService, deregisterService } from "./consul/consul.js";
 import dotenv from "dotenv";
+import startConsume from './messaging/consumer';
 dotenv.config();
 
 const PORT = process.env.PORT || 3002;
@@ -11,6 +12,7 @@ async function start() {
   app.listen(PORT, () => {
     console.log(`Product Service running on port ${PORT}`);
   });
+  await startConsume();
 }
 
 start();

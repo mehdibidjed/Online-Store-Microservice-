@@ -36,6 +36,13 @@ export async function getProductById(id) {
     console.error("Error fetching product by ID:", error);
   }
 }
+export async function updateStockProduct(id,quantity){
+  try {
+        const result=await pool.query("SELECT * FROM ")    
+  } catch (error) {
+    
+  }
+}
 export async function updateProduct(id, product) {
   const { name, description, price, stock } = product;
 

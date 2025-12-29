@@ -23,6 +23,16 @@ export async function getAllProductsController(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+export async function updateStockPoruct(product_id, quantity) {
+  try {
+    const product = await getProductById(product_id);
+    product.stock = product.stock - quantity;
+    const updatedProduct = await updateProduct(product_id, product);
+    console.log(updatedProduct);
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function getProductByIdController(req, res) {
   try {
     const { id } = req.params;

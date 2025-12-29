@@ -1,3 +1,4 @@
+import { publishEvent } from "../messaging/publisher.js";
 import {
   createOrder,
   deleteOrder,
@@ -11,6 +12,10 @@ export const createOrderController = async (req, res) => {
   const orderData = req.body;
   try {
     const newOrder = await createOrder(orderData);
+    await publishEvent("order.created", {
+      product_id: newOrder.product_id,
+      quantity:newOrder.quantity
+    });
     res.status(201).json(newOrder);
   } catch (error) {
     res.status(500).json({ error: "Failed to create order" });
@@ -62,8 +67,7 @@ export const deleteOrderController = async (req, res) => {
   const deletedOrder = await deleteOrder(orderId);
   if (deletedOrder) {
     res.status(200).json({ message: "Order deleted successfully" });
-  }else{
+  } else {
     res.status(500).json({ error: "Failed to delete order" });
   }
 };
-
