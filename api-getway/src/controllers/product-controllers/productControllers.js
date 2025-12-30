@@ -1,4 +1,5 @@
 import axios from "axios";
+import getServiceAddress from "../../consum/registery.js";
 
 export const getAllProductsController = async (req, res) => {
   try {
@@ -25,7 +26,7 @@ export const createProductController = async (req, res) => {
   const productData = req.body;
   try {
     const response = await axios.post(
-      "http://product-service:3002/products/create-product",
+      `${await getServiceAddress("product-service")}/products/create-product`,
       productData
     );
     res.status(201).json(response.data);

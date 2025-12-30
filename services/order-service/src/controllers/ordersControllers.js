@@ -10,6 +10,7 @@ import {
 
 export const createOrderController = async (req, res) => {
   const orderData = req.body;
+  console.log(orderData)
   try {
     const newOrder = await createOrder(orderData);
     await publishEvent("order.created", {

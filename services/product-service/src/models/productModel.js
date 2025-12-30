@@ -1,6 +1,8 @@
 import pool from "../config/database.js";
 
 export async function createProduct(product) {
+  
+  
   const { name, description, price, stock } = product;
   try {
     const result = await pool.query(
@@ -45,7 +47,7 @@ export async function updateStockProduct(id,quantity){
 }
 export async function updateProduct(id, product) {
   const { name, description, price, stock } = product;
-
+  console.log("updated product",product);
   try {
     const result = await pool.query(
       `
